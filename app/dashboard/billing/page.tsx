@@ -16,7 +16,7 @@ const featureItems = [
 ];
 
 async function getData(userId: string) {
-  const data = await prisma.Subscription.findUnique({
+  const data = await prisma.subscription.findUnique({
     where: {
       userId: userId,
     },
