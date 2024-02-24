@@ -72,7 +72,7 @@ export default async function BillingPage() {
       return_url: "http://localhost:3000/dashboard",
     });
 
-    return redirect(session.url)
+    return redirect(session.url);
   }
 
   if (data?.status !== 'active') {
