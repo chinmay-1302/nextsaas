@@ -7,6 +7,7 @@ import { getStripeSession } from "@/app/lib/stripe";
 import { redirect } from "next/navigation";
 import {StripePortal, StripeSubscriptionCreationButton} from "@/app/components/Submitbuttons";
 import { stripe } from '@/app/lib/stripe';
+import { unstable_noStore } from "next/cache";
 
 const featureItems = [
   { name: "Lorem Ipsum something" },
@@ -17,6 +18,7 @@ const featureItems = [
 ];
 
 async function getData(userId: string) {
+  unstable_noStore();
   const data = await prisma.subscription.findUnique({
     where: {
       userId: userId,

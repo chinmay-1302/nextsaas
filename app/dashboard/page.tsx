@@ -4,10 +4,11 @@ import prisma from "../lib/db";
 import {getKindeServerSession} from "@kinde-oss/kinde-auth-nextjs/server";
 import { Edit, File, Trash } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, unstable_noStore } from "next/cache";
 import { TrashDelete } from "../components/Submitbuttons";
 
 async function getData(userId: string) {
+  unstable_noStore();
   const data = await prisma.note.findMany({
     where: {
       userId: userId,
