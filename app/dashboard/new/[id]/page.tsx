@@ -14,6 +14,8 @@ import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
 import prisma from "@/app/lib/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 async function getData({ userId, noteId }: { userId: string; noteId: string }) {
   const data = await prisma.note.findUnique({
@@ -40,9 +42,34 @@ export default async function DynamicRoute({
   const user = await getUser();
   const data = await getData({ userId: user?.id as string, noteId: params.id });
 
+  async function postData(formData: FormData) {
+    "use server";
+
+    if (!user) {
+      throw new Error("You are not authorised to perform this action");
+    }
+
+    const title = formData.get("title") as string;
+    const description = formData.get("description") as string;
+
+    await prisma.note.update({
+      where: {
+        id: params.id,
+      },
+      data: {
+        title: title,
+        description: description,
+      },
+    });
+
+    revalidatePath("/dashboard");
+
+    return redirect("/dashboard");
+  };
+
   return (
     <Card>
-      <form>
+      <form action={postData}>
         <CardHeader>
           <CardTitle>Edit Note</CardTitle>
           <CardDescription>

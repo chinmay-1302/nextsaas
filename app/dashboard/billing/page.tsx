@@ -41,6 +41,7 @@ export default async function BillingPage() {
   console.log("user id:", user?.id);
   const data = await getData(user?.id as string);
   console.log("data:", data);
+
   async function createSubscription() {
     "use server"
     const dbUser = await prisma.user.findUnique({
@@ -75,7 +76,7 @@ export default async function BillingPage() {
     return redirect(session.url);
   }
 
-  if (data?.status !== 'active') {
+  if (data?.status == 'active') {
     return(
       <div className='grid items-start gap-8'>
         <div className='flex items-center justify-between px-2'>
