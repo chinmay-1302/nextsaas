@@ -1,6 +1,7 @@
-# Notes SaaS - A simple note taking app
+# Nexts SaaS - A simple note taking app
 
-Notes SaaS is a simple note taking app that allows users to create, edit and delete notes. It also has a payment integration feature that allows users to subscribe to a premium plan to unlock more features. The app is built with Next.js, Tailwind CSS, Supabase, Prisma, Stripe and Kinde.
+![Next SaaS Demo](next-saas-demo.gif)
+NextSaaS is a simple note taking app that allows users to create, edit and delete notes. It also has a payment integration feature that allows users to subscribe to a premium plan to unlock more features. The app is built with Next.js, Tailwind CSS, Supabase, Prisma, Stripe and Kinde.
 The project can be accessed [here](https://nextsaas-blue.vercel.app/).
 
 ## Features
